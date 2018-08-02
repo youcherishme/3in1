@@ -1,2 +1,1 @@
-# 3in1
-Test readme
+# all in 1

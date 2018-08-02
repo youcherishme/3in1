@@ -1,0 +1,6 @@
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const GET_COMMENT = 'GET_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const COMMENT_LOADING = 'COMMENT_LOADING';
+export const COMMENT_NOT_FOUND = 'COMMENT_NOT_FOUND';
+export const GET_COMMENTS = 'GET_COMMENTS';

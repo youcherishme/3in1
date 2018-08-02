@@ -1,0 +1,6 @@
+export const ADD_PROJECT = 'ADD_PROJECT';
+export const GET_PROJECT = 'GET_PROJECT';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const PROJECT_LOADING = 'PROJECT_LOADING';
+export const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
+export const GET_PROJECTS = 'GET_PROJECTS';
