@@ -323,29 +323,4 @@ router.get(
   }
 );
 
-router.changePassword(
-  '/changePassword/:password/:userEmail',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const password = req.params.password;
-    const userEmail = req.params.userEmail;
-    console.log('changePassword with userEmail ', userEmail);
-
-    util.connectDatabaseByUserEmail(userEmail, () => {
-      var filter = {
-        $and: [
-          { userEmail: userEmail },
-          { _id: id },
-        ]
-      };
-
-      Task.findOne(filter)
-        .then(task => {
-          // Delete
-          task.remove().then(() => res.json({ success: true }));
-        })
-        .catch(err => res.status(404).json({ tasknotfound: 'No task found' }));
-    });
-  });
-
 module.exports = router;
