@@ -35,7 +35,7 @@ export const addRepoUser = (repoUserData, callback) => dispatch => {
   dispatch(setRepoUserLoading());
   const serviceUrl = process.env.REACT_APP_REPO_SERVICE_URL;
   const url = `${serviceUrl}/api/repo/repouser`;
-
+  console.log('addRepoUser ', url);
   axios
     .post(url, repoUserData)
     .then(res => {

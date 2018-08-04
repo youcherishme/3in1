@@ -41,17 +41,27 @@ router.get('/search/:searchTerm/:userEmail',
       }
       console.log('connectDatabaseByUserEmail: Connected to DB with userEmail ', userEmail);
 
-      var filter = {};
+      var filter = {
+        $and: [
+          { userEmail: userEmail },
+        ]
+      };
+
       if (searchTerm != '*') {
         filter = {
-          $or: [
-            { name: { "$regex": searchTerm, "$options": "i" } },
-            { code: { "$regex": searchTerm, "$options": "i" } },
-            { description: { "$regex": searchTerm, "$options": "i" } },
+          $and: [
+            { userEmail: userEmail },
+            {
+              $or: [
+                { name: { "$regex": searchTerm, "$options": "i" } },
+                { code: { "$regex": searchTerm, "$options": "i" } },
+                { description: { "$regex": searchTerm, "$options": "i" } },                    
+              ]
+            },
           ]
         };
       }
-
+      
       console.log(searchTerm);
       console.log(filter);
       Project.find(filter)

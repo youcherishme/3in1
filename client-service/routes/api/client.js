@@ -33,15 +33,25 @@ router.get('/search/:searchTerm/:userEmail',
       }
       console.log('connectDatabaseByUserEmail: Connected to DB with userEmail ', userEmail);
 
-      var filter = {};
+      var filter = {
+        $and: [
+          { userEmail: userEmail },
+        ]
+      };
+
       if (searchTerm != '*') {
         filter = {
-          $or: [
-            { name: { "$regex": searchTerm, "$options": "i" } },
-            { code: { "$regex": searchTerm, "$options": "i" } },
-            { firstName: { "$regex": searchTerm, "$options": "i" } },
-            { lastName: { "$regex": searchTerm, "$options": "i" } },
-            { phoneNo: { "$regex": searchTerm, "$options": "i" } },
+          $and: [
+            { userEmail: userEmail },
+            { 
+              $or: [
+                { name: { "$regex": searchTerm, "$options": "i" } },
+                { code: { "$regex": searchTerm, "$options": "i" } },
+                { firstName: { "$regex": searchTerm, "$options": "i" } },
+                { lastName: { "$regex": searchTerm, "$options": "i" } },
+                { phoneNo: { "$regex": searchTerm, "$options": "i" } },
+              ]
+            },
           ]
         };
       }

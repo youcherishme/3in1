@@ -275,6 +275,8 @@ router.post(
 
     if (id === undefined) {
       const adminEmail = req.body.adminEmail;
+      console.log('create repo user adminEmail ', adminEmail);      
+
       //  find Repo by adminEmail
       Repo.findOne({ 'adminEmail': adminEmail })
         .then(repo => {
@@ -283,7 +285,7 @@ router.post(
             repoid: repo._id,
             userEmail: req.body.userEmail,
           });
-          console.log('111');
+          console.log('create repo user newRepoUser ', newRepoUser);      
           newRepoUser.save().then(repoUser => {
             //create user in this renter db
             const connectionDb = repo.repoConnectionUrl;
@@ -293,16 +295,15 @@ router.post(
               email: repoUser.userEmail,                          
             };
 
-            console.log('222 ', userData);
+            console.log('userData ', userData);
             const serviceUrl = process.env.REACT_APP_USER_SERVICE_URL;
 
             const url = `${serviceUrl}/api/users/createuser`; 
   
-            console.log('333 ', url);
+            console.log('url ', url);
             axios
               .post(url, userData)
               .then(res =>{
-                console.log('4 ');
                 console.log('Created user ok');
               })
               .catch(err => {

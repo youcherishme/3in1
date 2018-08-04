@@ -46,10 +46,14 @@ router.get('/getTasksByAttacher/:attacherid/:attacherType/:searchTerm/:userEmail
         filter = {
           $and: [
             { userEmail: userEmail },
-            { name: { "$regex": searchTerm, "$options": "i" } },
+            {
+              $or: [
+                { name: { "$regex": searchTerm, "$options": "i" } },
+              ]
+            },
           ]
         };
-      }
+      }      
 
       if (attacherType != 1) //ALL ttt
       {
